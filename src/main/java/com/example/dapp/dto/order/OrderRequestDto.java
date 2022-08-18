@@ -11,5 +11,5 @@ import java.util.List;
 public class OrderRequestDto {
     private Long memberId;
     private String paymentMethod;
-    private List<ProductOrderRequestDto> productOrderList;
+//    private List<ProductOrderRequestDto> productOrderList;
 }

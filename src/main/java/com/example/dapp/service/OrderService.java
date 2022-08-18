@@ -2,27 +2,27 @@ package com.example.dapp.service;
 
 import com.example.dapp.dto.order.OrderRequestDto;
 import com.example.dapp.dto.order.OrderResponseDto;
-import com.example.dapp.dto.product.ProductOrderRequestDto;
 import com.example.dapp.dto.product.ProductOrderResponseDto;
 import com.example.dapp.enumeration.PaymentMethod;
-import com.example.dapp.model.Member;
-import com.example.dapp.model.Order;
-import com.example.dapp.model.Product;
+import com.example.dapp.model.*;
+import com.example.dapp.repository.CartItemRepository;
+import com.example.dapp.repository.CartRepository;
 import com.example.dapp.repository.MemberRepository;
 import com.example.dapp.repository.OrderRepository;
-import com.example.dapp.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final ProductRepository productRepository;
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
+    private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
 
     // 주문하기
     @Transactional
@@ -31,24 +31,28 @@ public class OrderService {
         Member member = memberRepository.findById(requestDto.getMemberId()).orElseThrow(
                 () -> new NullPointerException("해당 아이디는 존재하지 않습니다."));
 
+        Cart cart = cartRepository.findByMemberId(member.getId());
+        List<CartItem> cartItemList = cart.getCartItemList();
+
         OrderResponseDto orderResponseDto = new OrderResponseDto(member);
         Order order = new Order();
         long sum = 0L;
         long pointSum = 0L;
 
-        for(ProductOrderRequestDto productOrderRequestDto : requestDto.getProductOrderList()) {
+        for(CartItem cartItem : cartItemList) {
 
-            Product product = productRepository.findById(productOrderRequestDto.getId()).orElseThrow(
-                    () -> new NullPointerException("등록되지 않는 상품입니다."));
+//            Product product = productRepository.findById(productOrderRequestDto.getId()).orElseThrow(
+//                    () -> new NullPointerException("등록되지 않는 상품입니다."));
+            Product product = cartItem.getProduct();
 
             ProductOrderResponseDto productOrderResponseDto = new ProductOrderResponseDto(
-                product.getName(),productOrderRequestDto.getQuantity() * product.getPrice(), productOrderRequestDto.getQuantity()
+                product.getName(),cartItem.getCount() * product.getPrice(), cartItem.getCount()
             );
 
             orderResponseDto.getProductOrderList().add(productOrderResponseDto);
 
             //해당 상품의 재고에서 해당 상품의 주문 수량만큼을 제거
-            product.setInventory(product.getInventory() - productOrderRequestDto.getQuantity());
+            product.setInventory(product.getInventory() - cartItem.getCount());
 
             if(product.getInventory() < 0) {
                 throw new IllegalArgumentException("재고 수량을 초과하여 주문할 수 없습니다.");
@@ -92,6 +96,8 @@ public class OrderService {
         member.setAsset(assetAfterPayment);
         member.setPoint(pointAfterPayment);
         orderResponseDto.setTotalPrice(sum);
+
+        cartItemRepository.deleteAllByCartId(cart.getId());
 
         return orderResponseDto;
     }

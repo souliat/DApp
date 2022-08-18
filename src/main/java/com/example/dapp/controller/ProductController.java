@@ -25,7 +25,7 @@ public class ProductController {
     }
 
     //상품 전체 조회
-    @GetMapping("/product/search")
+    @GetMapping("/product/lookup")
     public List<GetProductResponseDto> getProducts() {
         return productService.getProducts();
     }
