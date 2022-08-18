@@ -20,7 +20,7 @@ public class Cart {
     private Long id;
 
     @Column(nullable = false)
-    private Long count;
+    private Long totalCount;
 
     @OneToOne
     @JoinColumn(name="MEMBER_ID")
@@ -32,7 +32,7 @@ public class Cart {
 
     public Cart(Member member) {
         this.member = member;
-        this.count = 0L;
+        this.totalCount = 0L;
     }
 
 

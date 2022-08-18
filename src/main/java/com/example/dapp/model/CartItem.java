@@ -17,6 +17,9 @@ public class CartItem {
     @Id
     private Long id;
 
+    @Column(nullable = false)
+    private Long count;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name="CART_ID")
@@ -27,8 +30,6 @@ public class CartItem {
     @JoinColumn(name="PRODUCT_ID")
     private Product product;
 
-    @Column(nullable = false)
-    private Long count;
 
     public CartItem(Cart cart, Product product, Long count) {
         this.cart = cart;

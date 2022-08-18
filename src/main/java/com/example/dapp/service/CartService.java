@@ -81,7 +81,7 @@ public class CartService {
             cartItem = new CartItem(cart, product, requestDto.getCount());
             cart.getCartItemList().add(cartItem);
             cartItemRepository.save(cartItem);
-            cart.setCount(cart.getCount() + 1);
+            cart.setTotalCount(cart.getTotalCount() + 1);
         }else {
             cartItem.setCount(cartItem.getCount() + requestDto.getCount());
         }
