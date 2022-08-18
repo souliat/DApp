@@ -1,8 +1,8 @@
 package com.example.dapp.controller;
 
-import com.example.dapp.dto.GetProductResponseDto;
-import com.example.dapp.dto.ProductRequestDto;
-import com.example.dapp.model.Product;
+import com.example.dapp.dto.product.GetProductResponseDto;
+import com.example.dapp.dto.product.ProductRequestDto;
+import com.example.dapp.dto.product.ProductResponseDto;
 import com.example.dapp.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class ProductController {
 
     //상품 등록
     @PostMapping("/product/register")
-    public Product registerProduct(@RequestBody ProductRequestDto requestDto) {
+    public ProductResponseDto registerProduct(@RequestBody ProductRequestDto requestDto) {
         return productService.registerProduct(requestDto);
     }
 

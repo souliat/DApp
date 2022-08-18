@@ -1,5 +1,6 @@
-package com.example.dapp.dto;
+package com.example.dapp.dto.order;
 
+import com.example.dapp.dto.product.ProductOrderRequestDto;
 import lombok.Getter;
 import lombok.Setter;
 

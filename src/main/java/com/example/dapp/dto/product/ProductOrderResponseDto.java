@@ -1,4 +1,4 @@
-package com.example.dapp.dto;
+package com.example.dapp.dto.product;
 
 import lombok.Getter;
 import lombok.Setter;

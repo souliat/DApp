@@ -1,7 +1,7 @@
 package com.example.dapp.controller;
 
-import com.example.dapp.dto.OrderRequestDto;
-import com.example.dapp.dto.OrderResponseDto;
+import com.example.dapp.dto.order.OrderRequestDto;
+import com.example.dapp.dto.order.OrderResponseDto;
 import com.example.dapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

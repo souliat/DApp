@@ -1,6 +1,6 @@
 package com.example.dapp.model;
 
-import com.example.dapp.dto.CompanyRequestDto;
+import com.example.dapp.dto.company.CompanyRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

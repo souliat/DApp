@@ -1,9 +1,9 @@
 package com.example.dapp.service;
 
-import com.example.dapp.dto.OrderRequestDto;
-import com.example.dapp.dto.OrderResponseDto;
-import com.example.dapp.dto.ProductOrderRequestDto;
-import com.example.dapp.dto.ProductOrderResponseDto;
+import com.example.dapp.dto.order.OrderRequestDto;
+import com.example.dapp.dto.order.OrderResponseDto;
+import com.example.dapp.dto.product.ProductOrderRequestDto;
+import com.example.dapp.dto.product.ProductOrderResponseDto;
 import com.example.dapp.enumeration.PaymentMethod;
 import com.example.dapp.model.Member;
 import com.example.dapp.model.Order;

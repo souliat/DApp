@@ -1,7 +1,8 @@
 package com.example.dapp.service;
 
-import com.example.dapp.dto.GetProductResponseDto;
-import com.example.dapp.dto.ProductRequestDto;
+import com.example.dapp.dto.product.GetProductResponseDto;
+import com.example.dapp.dto.product.ProductRequestDto;
+import com.example.dapp.dto.product.ProductResponseDto;
 import com.example.dapp.model.Company;
 import com.example.dapp.model.Product;
 import com.example.dapp.repository.CompanyRepository;
@@ -20,7 +21,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     //상품 등록
-    public Product registerProduct(ProductRequestDto requestDto) {
+    public ProductResponseDto registerProduct(ProductRequestDto requestDto) {
         Optional<Company> company = companyRepository.findByName(requestDto.getCompanyName());
 
         if (!company.isPresent()) {
@@ -31,7 +32,9 @@ public class ProductService {
         product.setCompany(company.get());
 
         productRepository.save(product);
-        return product;
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.ok();
+        return productResponseDto;
     }
 
     //상품 전체 조회
