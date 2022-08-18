@@ -1,0 +1,23 @@
+package com.example.dapp.controller;
+
+import com.example.dapp.dto.CompanyRequestDto;
+import com.example.dapp.model.Company;
+import com.example.dapp.service.CompanyService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequiredArgsConstructor
+@RestController
+public class CompanyController {
+
+    private final CompanyService companyService;
+
+    // 협력사 등록
+    @PostMapping("/company/register")
+    public Company registerCompany(@RequestBody CompanyRequestDto requestDto) {
+        return companyService.registerCompany(requestDto);
+    }
+
+}
