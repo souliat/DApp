@@ -33,8 +33,8 @@ public class CartController {
 
     //장바구니 개별 상품 삭제
     @DeleteMapping("/cart/delete/{id}")
-    public void cartProductDelete(@PathVariable Long id) {
-        cartService.cartProductDelete(id);
+    public void cartProductDelete(@PathVariable Long id, @RequestBody CartRequestDto requestDto) {
+        cartService.cartProductDelete(id, requestDto);
     }
 
     //장바구니 전체 상품 삭제

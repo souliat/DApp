@@ -98,6 +98,7 @@ public class OrderService {
         orderResponseDto.setTotalPrice(sum);
 
         cartItemRepository.deleteAllByCartId(cart.getId());
+        cart.setTotalCount(0L);
 
         return orderResponseDto;
     }

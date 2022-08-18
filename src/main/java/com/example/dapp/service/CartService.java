@@ -89,8 +89,17 @@ public class CartService {
     }
 
     // 장바구니 개별 상품 삭제
-    public void cartProductDelete(Long cartItemId) {
-        cartItemRepository.deleteById(cartItemId);
+    @Transactional
+    public void cartProductDelete(Long cartItemId, CartRequestDto requestDto) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(
+                () -> new NullPointerException("잘못된 접근입니다. 해당 상품은 존재하지 않습니다.")
+        );
+        Cart cart = cartRepository.findByMemberId(requestDto.getMemberId());
+
+        cartItemRepository.deleteById(cartItem.getId());
+
+        cart.setTotalCount(cart.getTotalCount() - 1);
+
     }
 
     // 장바구니 전체 삭제
@@ -99,5 +108,6 @@ public class CartService {
 
         Cart cart = cartRepository.findByMemberId(requestDto.getMemberId());
         cartItemRepository.deleteAllByCartId(cart.getId());
+        cart.setTotalCount(0L);
     }
 }

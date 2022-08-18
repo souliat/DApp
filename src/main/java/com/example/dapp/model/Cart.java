@@ -35,5 +35,4 @@ public class Cart {
         this.totalCount = 0L;
     }
 
-
 }
