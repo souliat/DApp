@@ -1,5 +1,6 @@
 # 📏 ERD
-![DApp_ERD](https://user-images.githubusercontent.com/20571260/185387788-9664bac1-a91c-4325-8dc6-b0bb176f7dfb.JPG)
+<img width="1245" alt="DApp_ERD" src="https://user-images.githubusercontent.com/20571260/185790398-0ae5cb0a-1309-4932-b167-7cb010e009e6.png">
+
 
 
 # 🛠 API명세서
